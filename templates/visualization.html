@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <div class="header-row">
+        <div>
+            <h1>🌌 Visualization Board</h1>
+            <p class="subtitle">
+                Drag your cards around to arrange the reality you’re calling in.
+            </p>
+        </div>
+    </div>
+
+    <!-- Add new card -->
+    <div class="card form-card">
+        <div class="card-header">
+            <h2>Create a New Vision Card</h2>
+            <p class="muted">Give it a name and an optional image URL.</p>
+        </div>
+        <div class="card-body">
+            <form id="add-card-form" action="/visualization/add" method="POST" class="add-card-form">
+                <div class="form-group">
+                    <label for="title">Card Title *</label>
+                    <input class="input" type="text" id="title" name="title" placeholder="I buy a cat." required>
+                </div>
+                <div class="form-group">
+                    <label for="image_url">Image URL (optional)</label>
+                    <input class="input" type="text" id="image_url" name="image_url" placeholder="https://example.com/image.jpg">
+                </div>
+                <button class="primary-button" type="submit">
+                    + Add Card
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Floating cards container -->
+    <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+            <h2>Your Vision Board</h2>
+            <p class="muted">Drag cards around to rearrange. Changes save automatically.</p>
+        </div>
+        <div class="card-body">
+            {% if cards %}
+                <div id="board" class="floating-board">
+                    {% for card in cards %}
+                    <div class="vision-card draggable-card"
+                         data-id="{{ card.id }}"
+                         style="transform: translate({{ card.x_position or 0 }}px, {{ card.y_position or 0 }}px) scale({{ card.scale or 1 }}) rotate({{ card.rotation or 0 }}deg);">
+                        {% if card.image_url %}
+                        <div class="vision-image-wrapper">
+                            <img src="{{ card.image_url }}" alt="{{ card.title }}">
+                        </div>
+                        {% endif %}
+                        <div class="vision-title">{{ card.title }}</div>
+                        <div class="vision-meta">Drag to move · Double-click image link to change in future versions</div>
+                        <div class="card-controls">
+                            <button class="secondary-button small danger delete-btn" type="button">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="muted">
+                    No visualization cards yet — start by creating your first vision above ✨
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Floating board drag-and-drop
+const board = document.getElementById('board');
+const cards = document.querySelectorAll('.floating-board .draggable-card');
+
+cards.forEach(card => {
+    let isDragging = false;
+    let startX, startY, origX, origY;
+
+    card.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const style = window.getComputedStyle(card);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        origX = matrix.m41;
+        origY = matrix.m42;
+        card.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        card.style.transform = `translate(${origX + dx}px, ${origY + dy}px) scale(1) rotate(0deg)`;
+    });
+
+    document.addEventListener('mouseup', e => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.cursor = 'grab';
+
+        const style = window.getComputedStyle(card);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        const x = matrix.m41;
+        const y = matrix.m42;
+
+        // Send updated position to backend
+        const cardId = card.dataset.id;
+        fetch(`/visualization/update/${cardId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ x_position: x, y_position: y, scale: 1, rotation: 0 })
+        });
+    });
+});
+
+// Delete card
+document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        const card = btn.closest('.draggable-card');
+        const cardId = card.dataset.id;
+
+        fetch(`/visualization/delete/${cardId}`, { method: 'POST' })
+            .then(() => card.remove());
+    });
+});
+</script>
+
+{% endblock %}

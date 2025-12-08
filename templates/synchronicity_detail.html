@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+    <h1>✨ Synchronicity Details</h1>
+    <p class="subtitle">{{ synch.created_at }}</p>
+
+    <div class="card neon-card" style="margin-top: 1.5rem;">
+        {% if synch.title %}
+            <h2>{{ synch.title }}</h2>
+        {% endif %}
+
+        {% if synch.category %}
+            <p><strong>Category:</strong> {{ synch.category }}</p>
+        {% endif %}
+
+        {% if synch.description %}
+            <p style="margin-top: 1rem;">{{ synch.description }}</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('analytics') }}" class="btn neon-btn" style="margin-top: 1.5rem;">
+        ⬅ Back to Analytics
+    </a>
+</div>
+
+{% endblock %}

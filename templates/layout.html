@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Synchros - Intention Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Make sure this filename matches your actual CSS name -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="app-logo">🌟</div>
+            <div class="app-title">
+                <div class="app-name">Synchros</div>
+                <div class="app-tagline">Track Intentions &amp; synchronicities</div>
+            </div>
+        </div>
+
+        {% set current = request.endpoint %}
+
+        {# If user is logged in, show full app navigation #}
+        {% if session.get("user_id") %}
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Overview</div>
+                <a href="{{ url_for('dashboard') }}"
+                   class="nav-link {% if current == 'dashboard' %}active{% endif %}">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Intentions</div>
+                <a href="{{ url_for('journal') }}"
+                   class="nav-link {% if current in ['journal', 'manifestation_detail'] %}active{% endif %}">
+                    <span class="nav-icon">🪄</span>
+                    <span class="nav-text">All Intentions</span>
+                </a>
+                <a href="{{ url_for('add_manifestation') }}"
+                   class="nav-link small-link {% if current == 'add_manifestation' %}active{% endif %}">
+                    <span class="nav-icon">＋</span>
+                    <span class="nav-text">New Intention</span>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Synchronicities</div>
+                <a href="{{ url_for('synchronicities') }}"
+                   class="nav-link {% if current == 'synchronicities' %}active{% endif %}">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-text">All Synchronicities</span>
+                </a>
+                <a href="{{ url_for('add_synchronicity') }}"
+                   class="nav-link small-link {% if current in ['add_synchronicity', 'add_synchronicity_for_manifestation'] %}active{% endif %}">
+                    <span class="nav-icon">＋</span>
+                    <span class="nav-text">New Synchronicity</span>
+                </a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Insights</div>
+                <a href="{{ url_for('analytics') }}"
+                   class="nav-link {% if current == 'analytics' %}active{% endif %}">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="{{ url_for('visualization') }}"
+                   class="nav-link {% if current == 'visualization' %}active{% endif %}">
+                    <span class="nav-icon">🖼️</span>
+                    <span class="nav-text">Visualization Board</span>
+                </a>
+            </div>
+
+            <div class="sidebar-footer">
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </div>
+
+        {# If user is NOT logged in, only show Login & Register #}
+        {% else %}
+
+            <div class="sidebar-section">
+                <div class="sidebar-label">Account</div>
+                <a href="{{ url_for('login') }}"
+                   class="nav-link {% if current == 'login' %}active{% endif %}">
+                    <span class="nav-icon">🔐</span>
+                    <span class="nav-text">Login</span>
+                </a>
+                <a href="{{ url_for('register') }}"
+                   class="nav-link {% if current == 'register' %}active{% endif %}">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-text">Create Account</span>
+                </a>
+            </div>
+
+        {% endif %}
+    </nav>
+
+    <!-- RIGHT SIDE: PAGE CONTENT -->
+    {% block content %}{% endblock %}
+
+</body>
+</html>

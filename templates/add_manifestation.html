@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main-content">
+
+    <h1 class="glow-title">Create Your Intention ✨</h1>
+
+    <form action="/add_manifestation" method="post" class="form-card">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" placeholder="Your intention title" required>
+
+        <label for="entry_text">Script:</label>
+        <textarea name="entry_text" id="entry_text" placeholder="Write your intention" required></textarea>
+
+        <label for="category">Category (optional):</label>
+        <input type="text" name="category" id="category" placeholder="e.g., Career, Love, Health">
+
+        <label for="emotion">Emotion:</label>
+        <select name="emotion" id="emotion">
+            <option value="">--Select Emotion--</option>
+            <option value="Joy 😄">Joy 😄</option>
+            <option value="Gratitude 🙏">Gratitude 🙏</option>
+            <option value="Excitement ✨">Excitement ✨</option>
+            <option value="Love 💖">Love 💖</option>
+            <option value="Hope 🌈">Hope 🌈</option>
+            <option value="Calm 🕊️">Calm 🕊️</option>
+        </select>
+
+        <label for="keywords">Keywords (comma separated, optional):</label>
+        <input type="text" name="keywords" id="keywords" placeholder="e.g., abundance, career, love, education, etc.">
+
+        <button class="btn btn-primary" type="submit">Add Intention</button>
+    </form>
+
+</div>
+{% endblock %}

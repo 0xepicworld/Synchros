@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <h1>✨ Dashboard</h1>
+    <p class="subtitle">An overview of your Intentions & their related Synchronicities.</p>
+
+    <!-- Top stats -->
+    <div class="grid-3">
+        <div class="card neon-card">
+            <h3>Total Intentions</h3>
+            <p class="big-number">{{ total_manifests }}</p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>Total Synchronicities</h3>
+            <p class="big-number">{{ total_synchronicities }}</p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>Activity (last 7 days)</h3>
+            <p class="big-number">{{ recent_activity_count }}</p>
+        </div>
+    </div>
+
+    {% if last_log %}
+    <p class="muted" style="margin-top: 0.5rem;">
+        Last logged entry: <strong>{{ last_log }}</strong>
+    </p>
+    {% else %}
+    <p class="muted" style="margin-top: 0.5rem;">
+        You haven’t logged anything yet. Your new reality is a single click away. 🌱
+    </p>
+    {% endif %}
+
+    <div class="grid-2" style="margin-top: 2rem; gap: 1.5rem;">
+
+        <!-- Recent Manifests -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🪄 Recent Intentions</h2>
+                <a href="{{ url_for('add_manifestation') }}" class="pill-link">+ New Intention</a>
+            </div>
+            <div class="card-body">
+                {% if recent_manifests %}
+                    <ul class="list">
+                        {% for m in recent_manifests %}
+                        <li class="list-item">
+                            <div class="list-main">
+                                <div class="list-title">{{ m.title }}</div>
+                                {% if m.status %}
+                                <div class="list-tag">{{ m.status }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="list-meta">
+                                {{ m.created_at }}
+                                <!-- Optional: link to detail page if you have it -->
+                                <!-- <a href="{{ url_for('add_manifestation', manifest_id=m.id) }}" class="tiny-link">Open</a> -->
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="muted">No intentions logged yet. Start with your first intention.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Recent Synchronicities -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🔮 Recent Synchronicities</h2>
+                <a href="{{ url_for('add_synchronicity') }}" class="pill-link">+ New Synchronicity</a>
+            </div>
+            <div class="card-body">
+                {% if recent_synchronicities %}
+                    <ul class="list">
+                        {% for s in recent_synchronicities %}
+                        <li class="list-item">
+                            <div class="list-main">
+                                <div class="list-title">{{ s.title }}</div>
+                                {% if s.category %}
+                                <div class="list-tag">{{ s.category }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="list-meta">
+                                {{ s.created_at }}
+                                <!-- Optional: link to detail page -->
+                                <!-- <a href="{{ url_for('add_synchronicity', synch_id=s.id) }}" class="tiny-link">Open</a> -->
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="muted">No synchronicities logged yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

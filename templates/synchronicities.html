@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main-content">
+    <h1 class="page-title">🌟 Synchronicity Tracker</h1>
+    <a href="/add_synchronicity" class="btn neon-btn">+ New Synchronicity</a>
+
+    <div class="card-list">
+        {% for s in synchronicities %}
+        <div class="card">
+            <h3>{{ s.title }}</h3>
+            <p>{{ s.description }}</p>
+            <p class="category">{{ s.category }}</p>
+
+            <form action="/delete_synchronicity/{{ s.id }}" method="POST">
+                <button class="btn small danger">Delete</button>
+            </form>
+        </div>
+        {% else %}
+        <p>No synchronicities yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main-content">
+
+    <h1 class="glow-title">Login ✨</h1>
+
+    <div class="card form-card">
+
+        {# 🔴 Error message area – supports single or multiple errors #}
+        {% if error or errors %}
+        <div class="alert alert-error">
+            {% if errors %}
+                <ul class="error-list">
+                    {% for e in errors %}
+                        <li>{{ e }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {{ error }}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('login') }}" method="post">
+            <label for="username">Username</label>
+            <input
+                id="username"
+                name="username"
+                type="text"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                required
+            >
+
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+    <h1>🔮Analytics</h1>
+    <p class="subtitle">See patterns in your reality.</p>
+
+    <!-- Stats Cards -->
+    <div class="grid-3">
+        <div class="card neon-card">
+            <h3>Total Synchronicities</h3>
+            <p class="big-number">{{ total }}</p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>Most Common Category</h3>
+            <p class="big-number">{{ most_common_category if most_common_category else "None yet" }}</p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>7-Day Streak</h3>
+            <p class="big-number">{{ streak }}</p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- List of All Synchros -->
+    <h2>Timeline</h2>
+    <div class="synchro-list">
+        {% for s in synchros %}
+            <a class="synchro-item neon-border"
+                href="{{ url_for('synchronicity_detail', synch_id=s.id) }}">
+                <div>
+                    <strong>{{ s.category }}</strong>
+                    <br>
+                    <span class="small-date">{{ s.created_at }}</span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

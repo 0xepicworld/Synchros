@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <div class="header-row">
+        <div>
+            <h1>🪄 {{ manifestation.title }}</h1>
+            <p class="subtitle">
+                A living storyline of this intention and the synchronicities around it.
+            </p>
+        </div>
+        <div class="header-actions">
+            <a href="{{ url_for('journal') }}" class="pill-link">← Back to Intentions</a>
+        </div>
+    </div>
+
+    <!-- Top summary -->
+    <div class="grid-3">
+        <div class="card neon-card">
+            <h3>Status</h3>
+            <p class="big-number">
+                {% if manifestation.status == 'manifested' %}
+                    ✅ Fulfilled
+                {% elif manifestation.status == 'abandoned' %}
+                    🗂️ Abandoned
+                {% else %}
+                    ✨ Active
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>Started</h3>
+            <p class="big-number">{{ manifestation.date }}</p>
+        </div>
+
+        <div class="card neon-card">
+            <h3>Fulfilled</h3>
+            <p class="big-number">
+                {% if manifestation.completed_at %}
+                    {{ manifestation.completed_at }}
+                {% else %}
+                    —
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <!-- Intention script + meta -->
+    <div class="grid-2" style="margin-top: 2rem; gap: 1.5rem;">
+        <div class="card">
+            <div class="card-header">
+                <h2>📝 Intention Script</h2>
+            </div>
+            <div class="card-body">
+                <p>{{ manifestation.entry_text | replace('\n', '<br>') | safe }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Details</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Category:</strong> {{ manifestation.category or "—" }}</p>
+                <p><strong>Emotion:</strong> {{ manifestation.emotion or "—" }}</p>
+                <p><strong>Keywords:</strong> {{ manifestation.keywords or "—" }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions row -->
+    <div class="card" style="margin-top: 2rem;">
+        <div class="card-header">
+            <h2>Actions</h2>
+        </div>
+        <div class="card-body actions-row">
+            <a href="{{ url_for('add_synchronicity_for_manifestation', manifestation_id=manifestation.id) }}"
+               class="primary-button">
+                + Log Synchronicity for this Intention
+            </a>
+
+            {% if manifestation.status != 'manifested' %}
+            <form action="{{ url_for('complete_manifestation', manifestation_id=manifestation.id) }}" method="post" class="inline-form">
+                <label for="outcome_text" class="muted" style="display:block; margin-bottom: 0.5rem;">
+                    When and how did this intention get fulfilled? (Optional reflection)
+                </label>
+                <textarea name="outcome_text" id="outcome_text" rows="2" class="input"
+                          placeholder="Describe how this intention showed up in your reality..."></textarea>
+                <button type="submit" class="secondary-button" style="margin-top: 0.5rem;">
+                    Mark as Fulfilled ✅
+                </button>
+            </form>
+            {% else %}
+                {% if manifestation.outcome_text %}
+                <div style="margin-top: 1rem;">
+                    <h3>Outcome Reflection</h3>
+                   <p>{{ manifestation.outcome_text | replace('\n', '<br>') | safe }}</p>
+                </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Synchronicity timeline -->
+    <div class="card" style="margin-top: 2rem;">
+        <div class="card-header">
+            <h2>🔮 Synchronicity Timeline</h2>
+            <p class="muted">All the signs and synchronicities connected to this intention.</p>
+        </div>
+        <div class="card-body">
+            {% if synchronicities %}
+                <ul class="timeline">
+                    {% for s in synchronicities %}
+                    <li class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="timeline-title">{{ s.title }}</span>
+                                <span class="timeline-date">{{ s.created_at }}</span>
+                            </div>
+                            {% if s.category %}
+                                <div class="list-tag">{{ s.category }}</div>
+                            {% endif %}
+                            <p class="timeline-description">{{ s.description }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="muted">
+                    No synchronicities logged yet for this intention. Start by logging the first sign that feels connected.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

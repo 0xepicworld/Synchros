@@ -1,0 +1,716 @@
+/* ------------------------------------------------------------
+   GENERAL — BODY AND MAIN CONTENT
+------------------------------------------------------------ */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    padding: 30px;
+    flex: 1;
+    margin-left: 0;
+}
+
+/* ------------------------------------------------------------
+   LOGIN ERROR ALERT
+------------------------------------------------------------ */
+.alert {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    background: rgba(255, 82, 82, 0.12);
+    border: 1px solid rgba(255, 82, 82, 0.7);
+    color: #ffb3b3;
+    backdrop-filter: blur(12px);
+}
+
+/* ------------------------------------------------------------
+   LAYOUT — SIDEBAR
+------------------------------------------------------------ */
+
+.sidebar {
+    width: 260px;
+    padding: 1.5rem 1rem;
+    background: #050814;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100vh;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.app-logo {
+    font-size: 1.8rem;
+}
+
+.app-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.app-tagline {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-section {
+    margin-top: 0.5rem;
+}
+
+.sidebar-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.3rem;
+}
+
+/* ------------------------------------------------------------
+   NAV LINKS
+------------------------------------------------------------ */
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.nav-link.small-link {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(2px);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    color: #ffffff;
+}
+
+.nav-icon {
+    width: 1.4rem;
+    text-align: center;
+}
+
+.nav-text {
+    flex: 1;
+}
+
+
+/* ------------------------------------------------------------
+   BUTTONS — NEON GLOW
+------------------------------------------------------------ */
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #ffb6c1, #ff4d6d);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+    transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------
+   GLOW TITLE
+------------------------------------------------------------ */
+.glow-title {
+    color: #ff4d6d;
+    text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ff4d6d, 0 0 20px #ff4d6d;
+}
+
+/* ------------------------------------------------------------
+   JOURNAL — PHASE 2 ENHANCEMENTS
+------------------------------------------------------------ */
+.journal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.journal-card {
+    background: linear-gradient(145deg, #ffe4f2, #f9e6ff);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.journal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+}
+
+.tag {
+    display: inline-block;
+    background-color: #ffb6c1;
+    color: #fff;
+    border-radius: 50px;
+    padding: 4px 12px;
+    margin-right: 5px;
+    font-size: 0.85em;
+}
+
+.btn-danger {
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-danger:hover {
+    background-color: #ff1f4b;
+}
+
+/* ------------------------------------------------------------
+   ADD MANIFESTATION FORM
+------------------------------------------------------------ */
+.form-card {
+    background: linear-gradient(145deg, #fff0f5, #ffe4f2);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
+    max-width: 600px;
+}
+
+.form-card label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff4d6d;
+}
+
+.form-card input[type="text"],
+.form-card textarea,
+.form-card select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #ffb6c1;
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+
+.form-card input[type="text"]:focus,
+.form-card textarea:focus,
+.form-card select:focus {
+    box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+}
+
+.form-card textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ============================================================
+   ANALYTICS PAGE — NEON CARDS + GRID
+============================================================ */
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin: 20px 0;
+}
+
+.big-number {
+    font-size: 34px;
+    font-weight: bold;
+    color: #ff66cc;
+}
+
+.neon-card {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #ffb3e6;
+    box-shadow: 0 0 15px #ff66cc55;
+}
+
+/* Synchro Timeline */
+.synchro-list {
+    margin-top: 25px;
+}
+
+.synchro-item {
+    display: block;
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px #cc66ff55;
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.synchro-item:hover {
+    transform: scale(1.02);
+}
+
+.small-date {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+/* ============================================================
+   GLOBAL PAGE LAYOUT / TITLES / BUTTONS
+============================================================ */
+
+/* Center content and keep it from getting too wide */
+.main-content {
+    flex: 1;
+    padding: 32px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Top row: page title + actions */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.header-row h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Generic cards (dark neon flavour) */
+.card {
+    background: radial-gradient(circle at top left, #241b3b 0, #050814 60%);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+    padding: 1.3rem 1.5rem;
+    box-sizing: border-box;
+}
+
+.card + .card {
+    margin-top: 1.2rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.card-body {
+    font-size: 0.95rem;
+}
+
+/* 2-column grid commonly used on journal + detail pages */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+/* Primary / secondary actions */
+.primary-button,
+.secondary-button,
+.pill-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.primary-button {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 0 18px rgba(236, 72, 153, 0.55);
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 24px rgba(236, 72, 153, 0.7);
+}
+
+.secondary-button {
+    background: transparent;
+    color: #f9a8ff;
+    border: 1px solid rgba(249, 168, 255, 0.6);
+}
+
+.secondary-button:hover {
+    background: rgba(249, 168, 255, 0.1);
+}
+
+.pill-link {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pill-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Muted helper text */
+.muted {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================================
+   LIST STYLES — JOURNAL & SYNCHRONICITIES
+============================================================ */
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    padding: 0.75rem 0.6rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.list-item + .list-item {
+    margin-top: 0.35rem;
+}
+
+.list-item:hover {
+    background: radial-gradient(circle at left, rgba(124, 58, 237, 0.28), transparent 70%);
+    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.4);
+}
+
+.list-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.list-title {
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.list-title:hover {
+    text-decoration: underline;
+}
+
+.list-meta {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.list-tag,
+.list-tag.success,
+.list-tag.warning {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: rgba(129, 140, 248, 0.25);
+    border: 1px solid rgba(129, 140, 248, 0.7);
+    color: #e0e7ff;
+}
+
+.list-tag.success {
+    background: rgba(34, 197, 94, 0.18);
+    border-color: rgba(34, 197, 94, 0.8);
+    color: #bbf7d0;
+}
+
+.list-tag.warning {
+    background: rgba(249, 115, 22, 0.18);
+    border-color: rgba(249, 115, 22, 0.9);
+    color: #fed7aa;
+}
+
+/* ============================================================
+   FORMS — ADD SYNCHRONICITY / ADD MANIFESTATION
+============================================================ */
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f9a8ff;
+}
+
+.input,
+.form-card input[type="text"],
+.form-card textarea,
+.form-card select {
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.input:focus,
+.form-card input[type="text"]:focus,
+.form-card textarea:focus,
+.form-card select:focus {
+    border-color: #f472b6;
+    box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.8);
+    background: rgba(15, 23, 42, 1);
+}
+
+/* Override previous light form-card style with darker neon version */
+.form-card {
+    background: radial-gradient(circle at top left, #241b3b 0, #050814 60%);
+    padding: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 0 22px rgba(236, 72, 153, 0.45);
+    max-width: 650px;
+}
+
+/* Keep textareas comfy */
+.form-card textarea,
+.input textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+/* Inline form area in manifestation detail */
+.inline-form {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* ============================================================
+   TIMELINE — MANIFESTATION DETAIL SYNCHRONICITIES
+============================================================ */
+
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid rgba(148, 163, 184, 0.6);
+    margin-left: 0.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 1.2rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -0.42rem;
+    top: 0.35rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f97316, #ec4899);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.9);
+}
+
+.timeline-content {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 12px;
+    padding: 0.7rem 0.8rem;
+    box-shadow: 0 0 16px rgba(148, 163, 184, 0.4);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+}
+
+.timeline-title {
+    font-weight: 600;
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    color: rgba(148, 163, 184, 0.9);
+}
+
+.timeline-description {
+    font-size: 0.9rem;
+    margin: 0.3rem 0 0;
+}
+
+/* ============================================================
+   VISUALIZATION / VISION BOARD
+============================================================ */
+
+.visualization-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.3rem;
+    margin-top: 1.5rem;
+}
+
+.vision-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: radial-gradient(circle at top, #4c1d95 0, #020617 60%);
+    border: 1px solid rgba(192, 132, 252, 0.8);
+    box-shadow: 0 0 22px rgba(168, 85, 247, 0.6);
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.vision-image-wrapper {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #020617;
+    max-height: 180px;
+}
+
+.vision-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.vision-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 0.4
+
+/* ----------------------------------
+    /* Visualization: form layout
+------------------------------------ */
+
+.add-card-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.add-card-form .form-group {
+    flex: 1 1 220px;
+    margin-bottom: 0;
+}
+
+/* Make the board feel like a space to play in */
+.floating-board {
+    position: relative;
+    min-height: 320px;
+    padding: 1rem;
+    border-radius: 18px;
+    background: radial-gradient(circle at top, rgba(65, 51, 122, 0.8), rgba(3, 7, 18, 0.95));
+    box-shadow: inset 0 0 25px rgba(15, 23, 42, 0.8);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Vision cards when used inside the floating board */
+.floating-board .vision-card {
+    cursor: grab;
+    max-width: 230px;
+    min-width: 200px;
+}
+
+/* Smaller button inside cards */
+.secondary-button.small {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+}
+
+/* Danger-ish tone for delete */
+.secondary-button.danger {
+    border-color: rgba(248, 113, 113, 0.85);
+    color: #fecaca;
+}
+
+.secondary-button.danger:hover {
+    background: rgba(248, 113, 113, 0.18);
+}

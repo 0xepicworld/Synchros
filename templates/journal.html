@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+    <div class="header-row">
+        <div>
+            <h1>🪄 Intentions</h1>
+            <p class="subtitle">Your active intentions and the realities you’ve already created.</p>
+        </div>
+        <div>
+            <a href="{{ url_for('add_manifestation') }}" class="primary-button">
+                + New Intention
+            </a>
+        </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 2rem; gap: 1.5rem;">
+
+        <!-- Active Intentions -->
+        <div class="card">
+            <div class="card-header">
+                <h2>✨ Active</h2>
+                <p class="muted">Intentions currently in motion.</p>
+            </div>
+            <div class="card-body">
+                {% if active_entries %}
+                    <ul class="list">
+                        {% for m in active_entries %}
+                        <li class="list-item">
+                            <div class="list-main">
+                                <a href="{{ url_for('manifestation_detail', manifestation_id=m.id) }}" class="list-title">
+                                    {{ m.title }}
+                                </a>
+                                {% if m.category %}
+                                    <span class="list-tag">{{ m.category }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="list-meta">
+                                Started: {{ m.date }}
+                                {% if m.emotion %}
+                                    · <span class="muted">Feeling: {{ m.emotion }}</span>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="muted">No active intentions yet. Start a new one above.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Completed + Abandoned -->
+        <div class="card">
+            <div class="card-header">
+                <h2>✅ Fulfilled & Archived</h2>
+                <p class="muted">Your completed or archived intentions.</p>
+            </div>
+            <div class="card-body">
+                {% if manifested_entries or abandoned_entries %}
+                    <ul class="list">
+                        {% for m in manifested_entries %}
+                        <li class="list-item">
+                            <div class="list-main">
+                                <a href="{{ url_for('manifestation_detail', manifestation_id=m.id) }}" class="list-title">
+                                    {{ m.title }}
+                                </a>
+                                <span class="list-tag success">Fulfilled</span>
+                            </div>
+                            <div class="list-meta">
+                                Created: {{ m.date }}
+                                {% if m.completed_at %}
+                                    · Manifested: {{ m.completed_at }}
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                        {% for m in abandoned_entries %}
+                        <li class="list-item">
+                            <div class="list-main">
+                                <a href="{{ url_for('manifestation_detail', manifestation_id=m.id) }}" class="list-title">
+                                    {{ m.title }}
+                                </a>
+                                <span class="list-tag warning">Abandoned</span>
+                            </div>
+                            <div class="list-meta">
+                                Created: {{ m.date }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="muted">Nothing fulfilled or archived yet. Everything’s still in motion. 🌌</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

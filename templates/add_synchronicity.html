@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="main-content">
+
+    <div class="header-row">
+        <div>
+            {% if manifestation %}
+                <h1>🔮 Log Synchronicity</h1>
+                <p class="subtitle">
+                    Add a sign connected to: <strong>{{ manifestation.title }}</strong>
+                </p>
+            {% else %}
+                <h1>Log Synchronicity</h1>
+                <p class="subtitle">
+                    Capture a meaningful sign or coincidence. You can optionally link it to an intention.
+                </p>
+            {% endif %}
+        </div>
+        <div class="header-actions">
+            <a href="{% if manifestation %}{{ url_for('manifestation_detail', manifestation_id=manifestation.id) }}{% else %}{{ url_for('synchronicities') }}{% endif %}"
+               class="pill-link">
+                ← Back
+            </a>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-body">
+            <form
+                method="post"
+                action="{% if manifestation %}{{ url_for('add_synchronicity_for_manifestation', manifestation_id=manifestation.id) }}{% else %}{{ url_for('add_synchronicity') }}{% endif %}"
+            >
+                {% if not manifestation %}
+                    <div class="form-group">
+                        <label for="manifestation_id">Related Intention (optional)</label>
+                        <select name="manifestation_id" id="manifestation_id" class="input">
+                            <option value="">— None / General sign —</option>
+                            {% for m in active_manifestations %}
+                                <option value="{{ m.id }}"
+                                    {% if selected_manifestation_id and m.id == selected_manifestation_id %}selected{% endif %}>
+                                    {{ m.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="title">Title *</label>
+                    <input type="text" id="title" name="title" class="input"
+                           placeholder="Short name for this sign (e.g., 'I saw the number 999, 3 times in a row')" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" rows="4" class="input"
+                              placeholder="Describe exactly what you observed, how you felt, and why this synchronicity is related to your intention."
+                              required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category (optional)</label>
+                    <input type="text" id="category" name="category" class="input"
+                           placeholder="e.g., Conversation, Numbers, Media, Dream">
+                </div>
+
+                <button type="submit" class="primary-button">
+                    Save Synchronicity
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
