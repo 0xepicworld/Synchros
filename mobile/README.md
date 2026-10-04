@@ -10,14 +10,16 @@ These commands run in a terminal on your computer (PowerShell on Windows, Termin
 
 1. Install **Expo Go** on your phone from the App Store or Google Play.
 2. Install **Node.js LTS** from https://nodejs.org (any version from 20.19.4 up works) and **Git** from https://git-scm.com.
-3. In the terminal:
+3. **Windows only, once:** open PowerShell normally (not as Administrator) and run
+   `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`, then answer `Y`. Without this, Windows blocks `npm`.
+4. In the terminal (on Windows, a normal PowerShell window opens in your user folder, which is where the code should go):
    ```bash
    git clone https://github.com/0xepicworld/Synchros.git
    cd Synchros/mobile
    npm install
    npx expo start
    ```
-4. Scan the QR code that appears (iPhone: Camera app; Android: Expo Go). Phone and computer must be on the same Wi-Fi. If it won't connect, stop with Ctrl+C and run `npx expo start --tunnel` instead.
+5. Scan the QR code that appears (iPhone: Camera app; Android: Expo Go). Phone and computer must be on the same Wi-Fi. If it won't connect, stop with Ctrl+C and run `npx expo start --tunnel` instead.
 
 Everything in the app runs in Expo Go, including the database, photos, sharing and reminders.
 
