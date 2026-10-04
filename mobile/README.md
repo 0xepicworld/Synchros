@@ -6,14 +6,18 @@ The original Flask web app lives in the repository root and is untouched.
 
 ## Run it on your phone (today)
 
-1. Install **Expo Go** from the App Store or Google Play.
-2. On your computer (Node 20+):
+These commands run in a terminal on your computer (PowerShell on Windows, Terminal on Mac). Your computer serves the app to your phone over Wi-Fi while you test.
+
+1. Install **Expo Go** on your phone from the App Store or Google Play.
+2. Install **Node.js LTS** from https://nodejs.org (any version from 20.19.4 up works) and **Git** from https://git-scm.com.
+3. In the terminal:
    ```bash
-   cd mobile
+   git clone https://github.com/0xepicworld/Synchros.git
+   cd Synchros/mobile
    npm install
    npx expo start
    ```
-3. Scan the QR code (iPhone: Camera app; Android: Expo Go).
+4. Scan the QR code that appears (iPhone: Camera app; Android: Expo Go). Phone and computer must be on the same Wi-Fi. If it won't connect, stop with Ctrl+C and run `npx expo start --tunnel` instead.
 
 Everything in the app runs in Expo Go, including the database, photos, sharing and reminders.
 
