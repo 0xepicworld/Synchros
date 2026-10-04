@@ -3,6 +3,10 @@
 **Video Demo:** (https://youtu.be/ojBYOTnr7a8)
 **GitHub Repository:** _(if applicable)_
 
+## Mobile app
+
+The redesigned iPhone and Android app lives in [`mobile/`](mobile/README.md), with its own launch runbook.
+
 ## Description
 
 Synchros is a web application built as my CS50 final project. It is an **intention and synchronicity tracker**: a digital space where users can write down their intentions (similar to goals, manifestations, or scripts), and log meaningful “signs” or coincidences they experience along the way. The project aims to bring structure and clarity to what is usually a very abstract process—paying attention to patterns in your life.
